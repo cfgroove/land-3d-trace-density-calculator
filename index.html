@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App 2</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Montserrat Font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+    <meta id="results_data" data-json>
+    <meta id="ovt_results_data" data-json>
+    <meta id="inputs_data" data-json>
+</head>
+<style>
+
+    /* Toast styling */
+body {
+    background: #fafafa;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#download_icon:hover {
+    opacity: .7;
+}
+
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+    color: white;
+}
+
+.colored-toast .swal2-close {
+    color: white;
+}
+
+.colored-toast .swal2-html-container {
+    color: white;
+}
+
+
+
+/* Aqteq CSS */
+
+.center_div_within_row {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+table {
+    /* border-collapse: separate; */
+}
+
+.table_row_header {
+    background:#f0f0f1;
+}
+
+.table_row_header_CMP {
+    background:#f0f0f1;
+}
+
+.source_id_header {
+    background:#f0f0f1;
+}
+
+.streamer_id_header {
+    background:#f0f0f1;
+}
+
+.table {
+    cursor: pointer;
+    margin-bottom: 35px;
+}
+
+.table td {
+    padding: .5rem;
+}
+
+.table th {
+    padding: .5rem;
+}
+
+.streamer_offset_header {
+    width: 50px;
+}
+
+.inline_setback_header {
+    width: 50px;
+}
+
+.table_row_header {
+    width:160px;
+}
+
+.table_row_header_CMP {
+    width:50px;
+}
+
+.source_offset_header {
+    width: 50px;
+}
+
+.results {
+    font-weight: 600;
+}
+
+.card {
+    box-shadow: rgb(65 78 66 / 8%) 0 2px 8px 0;
+    border: 0.3px solid #80808061;
+    border-radius: 10px;
+}
+
+.row {
+    margin-bottom: 5px;
+}
+
+div {
+    font-family: "Montserrat";
+    font-size: 14px;
+}
+
+.inputs_card {
+    margin: 20px;
+}
+
+.inputs_card_bottom_row {
+    margin-top:20px;
+}
+
+.inputs_title {
+    white-space: nowrap;
+    margin: auto;
+    width: 50%;
+}
+
+.results_line {
+    margin: 20px 0px 0px 0px
+}  
+
+.input {
+    background-color: #fff;
+    border: 1px solid #939393; /* eff0f6; */
+    border-radius: 15px;
+    box-shadow: rgba(27, 25, 121, .05) 0 2px 8px 0;
+    box-sizing: border-box;
+    color: #0b0a33;
+    cursor: text;
+    display: block;
+    font-family: 'Montserrat';
+    /* font-size: 18px;
+    font-weight: 500; */
+    height: 15px;
+    line-height: 1.111em;
+    min-height: 15px;
+    padding:15px 20px;
+    transition: box-shadow 300ms,color 300ms,border-color 300ms;
+    /* vertical-align: middle; */
+    width: 80%;
+}
+
+.input:focus {
+    transition: 'box-shadow' 300ms,color 300ms,'border-color' 300ms;
+    bordeR: 1px solid black;
+    box-shadow: rgb(129 129 129 / 12%) 0 2px 8px 0;
+}
+
+
+.dropdown {
+    background-color: #fff;
+    border: 1px solid #939393; /* eff0f6; */
+    border-radius: 15px;
+    box-shadow: rgba(27, 25, 121, .05) 0 2px 8px 0;
+    box-sizing: border-box;
+    color: #0b0a33;
+    cursor: text;
+    display: block;
+    font-family: 'Montserrat';
+    line-height: 1.111em;
+    padding: 5px 15px;
+    transition: box-shadow 300ms,color 300ms,border-color 300ms;
+    /* vertical-align: middle; */
+    width: 80%;
+}
+
+.dropdown:focus {
+    transition: 'box-shadow' 300ms,color 300ms,'border-color' 300ms;
+    bordeR: 1px solid black;
+    box-shadow: rgb(129 129 129 / 12%) 0 2px 8px 0;
+}
+
+.error {
+    font-weight: bold;
+}
+
+
+.input_error_tip[data-tip] {
+    position:relative;
+    z-index: 99999!important;
+}
+
+.input_error_tip[data-tip]:before {
+    content:'';
+    /* hides the tooltip when not hovered */
+    display:none;
+    content:'';
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #000000bf;	
+    position:absolute;
+    top:30px;
+    left:35px;
+    z-index:8;
+    font-size:0;
+    line-height:0;
+    width:0;
+    height:0;
+}
+
+.input_error_tip[data-tip]:after {
+    display: none;
+    content: attr(data-tip);
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    padding: 8px 12px;
+    background: #000000bf;
+    color: #fff;
+    z-index: 9;
+    font-size: 14px;
+    font-family: 'Montserrat';
+    height: 100%;
+    line-height: 18px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.input_error_tip[data-tip]:hover:before,
+
+.input_error_tip[data-tip]:hover:after {
+    display:block;
+}
+
+.result_error {
+    background: #ffa50073;
+    border-radius: 12px;
+}
+
+.result_error[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+.result_error[data-title]:after {
+    content: attr(data-title);
+    background-color: #fffcc1de;
+    color: #111;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    padding: 1px 5px 2px 5px;
+    bottom: -1.6em;
+    left: 100%;
+    /* white-space: nowrap; */
+    box-shadow: 1px 1px 3px #222222;
+    width: 165px;
+    border: 1px solid #111111;
+    z-index: 99999;
+    font-family: 'Montserrat';
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.result_error[data-title] {
+    position: relative;
+}
+
+.error[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+.error[data-title]:after {
+    content: attr(data-title);
+    background-color: #f3153eeb;
+    color: #111;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    padding: 1px 5px 2px 5px;
+    bottom: -1.6em;
+    left: 100%;
+    /* white-space: nowrap; */
+    box-shadow: 1px 1px 3px #222222;
+    width: 165px;
+    border: 1px solid #111111;
+    z-index: 99999;
+    font-family: 'Montserrat';
+    border-radius: 10px;
+    opacity: 0;
+    visibility: none;
+}
+
+.error[data-title] {
+    position: relative;
+}
+
+.js-plotly-plot .plotly .modebar--hover > :not(.watermark) {
+    opacity: 1 !important;
+}
+.input_error {
+    font-weight: bold;
+    background-color: #ff00343d;
+    box-shadow: rgb(255 12 57 / 67%) 0 0px 10px 0;
+    /* border-top: none !important; */
+}
+
+.top_cards {
+    max-width: 600px;
+}
+table td:hover {
+    background-color: rgba(0,0,0,.075);
+}
+
+
+
+
+.results_line {
+    /* box-shadow: rgb(65 78 66 / 8%) 0 2px 8px 0;
+    border: 0.3px solid #80808061; */
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.results_line .row {
+    margin-bottom: none;
+    /* margin: 5px 0px; */
+}
+
+#Results .results_line {
+    margin: 5px 0px 0px 0px;
+}
+
+#OVT_Analysis .results_line {
+    margin: 5px 0px 0px 0px;
+}
+
+.calculation_error {
+    background: #e7e7e7;
+    cursor: pointer;
+}
+
+.calculation_error[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+.calculation_error[data-title]:after {
+    content: attr(data-title);
+    background-color: #dfdfdfde;
+    color: #111;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    padding: 1px 5px 2px 5px;
+    bottom: -1em;
+    left: 100%;
+    /* white-space: nowrap; */
+    box-shadow: 1px 1px 3px #222222;
+    width: 165px;
+    border: 1px solid #111111;
+    z-index: 99999;
+    font-family: 'Montserrat';
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.calculation_error[data-title] {
+    position: relative;
+}
+
+
+
+
+
+
+/* art */
+
+.results_line2 {
+    margin: 20px 0px 0px 0px
+}  
+
+.results_line2 {
+    box-shadow: rgb(65 78 66 / 8%) 0 2px 8px 0;
+    border: 0.3px solid #80808061;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.results_line2 .row {
+    margin-bottom: none;
+    margin: 5px 0px;
+}
+
+#Results .results_line2 {
+    margin: 5px 0px 0px 0px;
+}
+
+sub {
+    bottom: 0em;
+}
+
+.lowered_sub {
+    bottom: -.2em !important;
+    font-weight: 500;
+}
+    
+.error {
+    font-weight: bold;
+}
+
+
+.input_error_tip[data-tip] {
+    position:relative;
+}
+
+.input_error_tip[data-tip]:before {
+    content:'';
+    /* hides the tooltip when not hovered */
+    display:none;
+    content:'';
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #000000bf;	
+    position:absolute;
+    top:30px;
+    left:35px;
+    z-index:8;
+    font-size:0;
+    line-height:0;
+    width:0;
+    height:0;
+}
+
+.input_error_tip[data-tip]:after {
+    display: none;
+    content: attr(data-tip);
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    padding: 8px 12px;
+    background: #000000bf;
+    color: #fff;
+    z-index: 9;
+    font-size: 14px;
+    font-family: 'Montserrat';
+    height: 100%;
+    line-height: 18px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.input_error_tip[data-tip]:hover:before,
+
+.input_error_tip[data-tip]:hover:after {
+    display:block;
+}
+
+.result_error {
+    background: #ffa50073;
+    border-radius: 12px;
+}
+
+.result_error[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+.result_error[data-title]:after {
+    content: attr(data-title);
+    background-color: #fffcc1de;
+    color: #111;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    padding: 1px 5px 2px 5px;
+    bottom: -1.6em;
+    left: 100%;
+    /* white-space: nowrap; */
+    box-shadow: 1px 1px 3px #222222;
+    width: 165px;
+    border: 1px solid #111111;
+    z-index: 99999;
+    font-family: 'Montserrat';
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.result_error[data-title] {
+    position: relative;
+}
+
+.error[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+.error[data-title]:after {
+    content: attr(data-title);
+    background-color: #f3153eeb;
+    color: #111;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    padding: 1px 5px 2px 5px;
+    bottom: -1.6em;
+    left: 100%;
+    /* white-space: nowrap; */
+    box-shadow: 1px 1px 3px #222222;
+    width: 165px;
+    border: 1px solid #111111;
+    z-index: 99999;
+    font-family: 'Montserrat';
+    border-radius: 10px;
+    opacity: 0;
+    visibility: none;
+}
+
+.error[data-title] {
+    position: relative;
+}
+
+.js-plotly-plot .plotly .modebar--hover > :not(.watermark) {
+    opacity: 1 !important;
+}
+.input_error {
+    font-weight: bold;
+    background-color: #ff00343d;
+    box-shadow: rgb(255 12 57 / 67%) 0 0px 10px 0;
+    /* border-top: none !important; */
+}
+
+.switch-button {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background: rgb(207 207 207 / 56%);
+    border-radius: 30px;
+    overflow: hidden;
+    width: 240px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #000000;
+    position: relative;
+    padding-right: 120px;
+    position: relative;
+}
+.switch-button:before {
+    content: "Chart";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    pointer-events: none;
+}
+.switch-button-checkbox {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2;
+}
+.switch-button-checkbox:checked + .switch-button-label:before {
+    transform: translateX(120px);
+    transition: transform 300ms linear;
+}
+.switch-button-checkbox + .switch-button-label {
+    position: relative;
+    padding: 15px 0;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+}
+.switch-button-checkbox + .switch-button-label:before {
+    content: "";
+    background: #c1f9bd;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 30px;
+    transform: translateX(0);
+    transition: transform 300ms;
+}
+.switch-button-checkbox + .switch-button-label .switch-button-label-span {
+    position: relative;
+}
+
+.animate__animated.animate__fadeIn {
+    --animate-duration: .5s;
+}
+.animate__animated.animate__fadeOutDown {
+    --animate-duration: 1.1s !important;
+}
+</style>
+
+<body>
+
+    <meta id='chart_defaulted' data-info='false'>
+    
+    <!-- <button onclick=r()></button> -->
+    <div class="row animate__animated" style='margin:auto; margin-top: 15px' id="results_chart_toggle">
+        <div class="switch-button" style="height: 57px!important;">
+            <input class="switch-button-checkbox" type="checkbox"></input>
+            <label class="switch-button-label" for=""><span class="switch-button-label-span">Results</span></label>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Inputs -->
+        <div class="col-12 col-lg-4 col-sm-10 card inputs_card top_cards" id="Inputs" style="min-height: 700px;">
+            <div class="card-body">
+                <h4 class="card-title">Inputs</h4>
+                <p class="card-text"></p>
+    
+                    <!-- Top Row -->
+                    <div class="inputs_card_top_row">
+    
+                        <div class="row">
+                            <div class="col-6 inputs_title">Units</div>
+                            <div class="col-6">
+                                <select class="dropdown" id="units" style="cursor:pointer" onchange=unitsChanged()>
+                                    <option value="Meters">Meters / Kilometers</option>
+                                    <option value="Feet">Feet / Miles</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Template Type</div>
+                            <div class="col-6">
+                                <select class="dropdown" id="template_type" style="cursor:pointer" onchange=templateChanged()>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Wing">Wing</option>
+                                    <option value="Corner">Corner</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-6 inputs_title">SP Interval <sub>(<span class="meter_feet"></span>)</sub></div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="sp_interval" name="sp_interval" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Receiver Interval <sub>(<span class="meter_feet"></span>)</sub></div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="receiver_interval" name="receiver_interval" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Shot Line Space <sub>(<span class="meter_feet"></span>)</sub></div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="shot_line_space" name="shot_line_space" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Receive Line Space <sub>(<span class="meter_feet"></span>)</sub></div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="receiver_line_space" name="receiver_line_space" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Receive Lines Active</div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="receiver_lines_active" name="receiver_lines_active" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Receivers Active Per Line</div>
+                            <div class="col-6">
+                                <div id="receivers_active_per_line_tip" class="input_error_tip" data-tip="Group spacing must be less than streamer length">
+                                    <input onkeyup=checkInputs(true) class="input" type="text" id="receivers_active_per_line" name="receivers_active_per_line" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Shots Fired In A Salvo</div>
+                            <div class="col-6">
+                                <div id="shots_fired_in_a_salvo_tip" class="input_error_tip" data-tip="Group spacing must be less than streamer length">
+                                    <input onkeyup=checkInputs(true) class="input" type="text" id="shots_fired_in_a_salvo" name="shots_fired_in_a_salvo" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Roll (in crossline shots)</div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="roll_in_crossline_shots" name="roll_in_crossline_shots" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <!-- This is a formula, not an input -->
+                        <!-- <div class="row">
+                            <div class="col-6 inputs_title">Total Receivers Active</div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="total_receivers_active" name="total_receivers_active" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div> -->
+                        <!-- This is a formula, not an input -->
+                        <!-- <div class="row">
+                            <div class="col-6 inputs_title">Inline Shot to Roll Ratio</div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="InputName" name="InputName" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div> -->
+                        <!-- <div class="row">
+                            <div class="col-6 inputs_title">Total Shots In Survey</div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="total_shots_in_survey" name="total_shots_in_survey" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div> -->
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-6 inputs_title">Survey Area <sub>(<span class="km_mile"></span><sup>2</sup>)</sub></div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="survey_area_input" name="survey_area_input" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Cost / <span class="km_mile_2">Sq Km</span></div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="cost_per_sq_km" name="cost_per_sq_km" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 inputs_title">Shots / Day</div>
+                            <div class="col-6">
+                                <input onkeyup=checkInputs(true) class="input" type="text" id="shots_per_day" name="shots_per_day" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </div>
+                        </div>
+                    </div>
+    
+            </div>
+        </div>
+        <!-- Inputs (END) -->
+        <!-- <div class="row">
+            <div class="col-3">
+                
+            </div>
+           
+        </div> -->
+
+
+        <div class="col-12 card col-lg-7  col-sm-10 animate__animated animate__fadeIn" id="Chart" style="display: none; margin-top:20px;">
+            <div id='chart' style="width: 100%; height: 100%"><!-- Plotly chart will be drawn inside this DIV --></div>            
+        </div>
+        
+
+        <!-- Results -->
+        <div class="col-12 col-lg-4  col-sm-12 card inputs_card top_cards animate__animated animate__fadeIn" id="Results">
+
+            <div class="card-body">
+                
+                <h4 class="card-title">Results</h4>
+               
+                <p class="card-text"></p>
+    
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Each Shot Fired</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="each_shot_fired"></div>  <sub class="lowered_sub">&nbsp;&nbsp;times</sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Thousand Traces / <span class="km_mile_2">Sq Km</span></div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="traces_per_sq_km"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"   data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Receivers / <span class="km_mile_2">Sq Km</span></div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="receivers_per_sq_km"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Unique Shots / <span class="km_mile_2">Sq Km</span></div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="unique_shots_per_sq_km"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"   data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Total Fold</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="total_fold"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Inline Bin Size</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="inline_bin_size"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Crossline Bin Size</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="crossline_bin_size"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Minimum Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="minimum_offset"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Minimum Continuous Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="max_min_offset"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Maximum Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="min_max"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Maximum Continuous Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="maximum_max_offset"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Shots Within Receiver Spread</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="shots_within_receiver_spread"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Shots on Either Side of Spread</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="shots_on_either_side_of_spread"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Integer Number</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="integer_number"></div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Maximum Continuous Crossline Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="minimum_max_crossline_offset"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Maximum Continuous Inline Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="maximum_inline_offset"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Average Shot Density</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="average_actual_shot_density"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Survey Area</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="survey_area"></div>  <sub class="lowered_sub">&nbsp;&nbsp;<span class="km2_mile2"></span></sub>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- <br><br>
+
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Minimum Max Crossline Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ResultName"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Maximum Inline Offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ResultName"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Average Actual Shot Density</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ResultName"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Survey Area</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ResultName"></div>
+                            </div>
+                        </div>
+                    </div> -->
+    
+            </div>
+        </div>
+        <!-- Results (END) -->
+
+         <!-- OVT Analysis -->
+         <div class="col-12 col-lg-3  col-sm-10 card inputs_card top_cards animate__animated animate__fadeIn" id="OVT_Analysis">
+            <div class="card-body">
+    
+                <h5 class="card-title" style="margin-bottom: 20px;">OVT Analysis</h5>
+                <p class="card-text"></p>
+
+                    <!-- <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Maximum inline offset</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ovt_maximum_inline_offset"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Min Max crossline</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ovt_min_max_crossline"></div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">OVT step size inline</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ovt_step_size_inline"></div> <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">OVT step size crossline</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ovt_step_size_crossline"></div> <sub class="lowered_sub">&nbsp;&nbsp;<span class="meter_feet"></span></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">OVT's inline</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ovt_inline"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">OVT's crossline</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ovt_crossline"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Fully populated OVT's</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="fully_populated_ovts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">OVT/Fold ratio</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="ovt_per_fold_ratio"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <h5 class="card-title" style="margin-bottom: 20px">Operational Summary</h5>
+
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Total shots in Survey</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="total_shots_in_survey_ovt"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Total Receivers</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="total_receivers"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <br> -->
+
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Total Survey Cost</div>
+                            <div class="col-6 center_div_within_row">
+                                <span class="results">$</span><div class="results" id="total_survey_cost"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Cost / shot</div>
+                            <div class="col-6 center_div_within_row">
+                                <span class="results">$</span><div class="results" id="cost_per_shot"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <br> -->
+
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Area shot / day</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="area_shot_per_day"></div> <sub class="lowered_sub">&nbsp;&nbsp;<span class="km_mile"></span><sup>2</sup></sub>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Receiver Moves / day</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="receiver_moves_per_day"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Duration</div> 
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="duration"></div> <sub class="lowered_sub">&nbsp;&nbsp;days</sub>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <br> -->
+
+                    <div class="results_line"  data-title="Calculation error!">
+                        <div class="row">
+                            <div class="col-6 results_title">Shot to receiver roll ratio</div>
+                            <div class="col-6 center_div_within_row">
+                                <div class="results" id="shot_to_receiver_roll_ratio"></div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+        <!-- OVT Analysis (END) -->
+    </div>
+    
+
+ <!-- Download options -->
+ <div class="col-12" style="margin-top:20px; margin-left: 10px; width: 100%">
+
+    <div class="row">
+        <div style="width: 21px; cursor: pointer" data-step="9" data-title="Download Spreadsheet" data-intro="Lastly, you can download your inputs, the results, and the below geometry calculations to a CSV.">
+            <svg id="download_icon" onclick=sendTableData() viewBox="0 0 512 512" fill="none">
+                <g clip-path="url(#clip0_526_1500)">
+                <path opacity="0.4" d="M320 24.0001V192H407.7C425.5 192 434.4 213.5 421.8 226.1L269.7 378.3C266.071 381.904 261.165 383.927 256.05 383.927C250.936 383.927 246.029 381.904 242.4 378.3L90.1001 226.1C77.5001 213.5 86.4001 192 104.2 192H192V24.0001C191.992 20.8461 192.608 17.7217 193.811 14.8063C195.014 11.8909 196.782 9.24205 199.012 7.01186C201.242 4.78168 203.891 3.01416 206.806 1.81085C209.722 0.607537 212.846 -0.0078392 216 7.53839e-05H296C299.154 -0.0078392 302.278 0.607537 305.194 1.81085C308.109 3.01416 310.758 4.78168 312.988 7.01186C315.219 9.24205 316.986 11.8909 318.189 14.8063C319.393 17.7217 320.008 20.8461 320 24.0001V24.0001Z" fill="#2BE132"/>
+                <path d="M488 352H341.3L292.3 401C287.539 405.779 281.882 409.57 275.653 412.157C269.424 414.744 262.745 416.076 256 416.076C249.255 416.076 242.576 414.744 236.347 412.157C230.118 409.57 224.461 405.779 219.7 401L170.7 352H24.0001C20.8461 351.992 17.7217 352.608 14.8063 353.811C11.8909 355.014 9.24205 356.782 7.01186 359.012C4.78168 361.242 3.01416 363.891 1.81085 366.806C0.607537 369.722 -0.0078392 372.846 7.53839e-05 376V488C-0.0078392 491.154 0.607537 494.278 1.81085 497.194C3.01416 500.109 4.78168 502.758 7.01186 504.988C9.24205 507.218 11.8909 508.986 14.8063 510.189C17.7217 511.393 20.8461 512.008 24.0001 512H488C491.154 512.008 494.278 511.393 497.194 510.189C500.109 508.986 502.758 507.218 504.988 504.988C507.218 502.758 508.986 500.109 510.189 497.194C511.393 494.278 512.008 491.154 512 488V376C512.008 372.846 511.393 369.722 510.189 366.806C508.986 363.891 507.218 361.242 504.988 359.012C502.758 356.782 500.109 355.014 497.194 353.811C494.278 352.608 491.154 351.992 488 352V352ZM368 448C364.836 448 361.742 447.062 359.111 445.304C356.48 443.546 354.429 441.047 353.218 438.123C352.007 435.199 351.69 431.982 352.307 428.879C352.925 425.775 354.449 422.924 356.686 420.686C358.924 418.449 361.775 416.925 364.879 416.308C367.982 415.69 371.199 416.007 374.123 417.218C377.047 418.429 379.545 420.48 381.304 423.111C383.062 425.742 384 428.836 384 432C384 436.244 382.314 440.313 379.314 443.314C376.313 446.314 372.244 448 368 448ZM432 448C428.836 448 425.742 447.062 423.111 445.304C420.48 443.546 418.429 441.047 417.218 438.123C416.007 435.199 415.69 431.982 416.307 428.879C416.925 425.775 418.449 422.924 420.686 420.686C422.924 418.449 425.775 416.925 428.879 416.308C431.982 415.69 435.199 416.007 438.123 417.218C441.047 418.429 443.545 420.48 445.304 423.111C447.062 425.742 448 428.836 448 432C448 436.244 446.314 440.313 443.314 443.314C440.313 446.314 436.244 448 432 448Z" fill="#005752"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_526_1500">
+                <rect width="512" height="512" fill="white"/>
+                </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <h5 style="z-index: -1">&nbsp; Download CSV (Inputs & Results)</h5> 
+    </div>
+
+</div>
+<!-- Downlload options (END)-->
+
+</body>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- SweetAlert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Plotly (Charts) -->
+<script src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
+<!-- Auto Run Code on Load -->
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        autoTest()
+    });
+
+    function defaultChart() {
+
+        var layout = {
+            showlegend: false,
+            showgrid: false,
+        };
+
+        Plotly.newPlot('chart', data=null, layout, config={responsive: true, 'displaylogo': false});
+
+    }
+
+    // chart / results toggle
+    $('.switch-button-checkbox').on('click', function(event) {
+    if (this.checked === true) // true = chart;   false = results
+    {
+        // hide results
+        $('#Results').addClass('animate__fadeOutDown')
+        $('#OVT_Analysis').addClass('animate__fadeOutDown')
+        setTimeout(() => {
+            $('#Results').css({'display': 'none'})
+            $('#Results').removeClass('animate__fadeOutDown')
+            $('#OVT_Analysis').css({'display': 'none'})
+            $('#OVT_Analysis').removeClass('animate__fadeOutDown')
+
+            // show chart
+            $('#Chart').css({'display': 'flex'})
+                setTimeout(() => {
+                    checkInputs() // generates updated chart, needs 100ms or else it will run too early.
+                }, 100);
+            if ($('#chart_defaulted').data('info') == false)
+            {
+                defaultChart()
+                $('#chart_defaulted').data('info', true)
+            }
+        }, 500);
+    }
+    else
+    {
+        // hide chart
+        $('#Chart').addClass('animate__fadeOutDown')
+        setTimeout(() => {
+            $('#Chart').css({'display': 'none'})
+            $('#Chart').removeClass('animate__fadeOutDown')
+
+            // show results
+            $('#Results').css({'display': 'flex'})
+            $('#OVT_Analysis').css({'display': 'flex'})
+        }, 500);
+    }
+})
+
+    function autoTest() {
+        $('#units').val('Meters')
+        $('#template_type').val('Normal')
+
+        $('#sp_interval').val(50)
+        $('#receiver_interval').val(50)
+        $('#shot_line_space').val(300)
+        $('#receiver_line_space').val(250)
+        $('#receiver_lines_active').val(12)
+        $('#receivers_active_per_line').val(180)
+        $('#shots_fired_in_a_salvo').val(5)
+        $('#roll_in_crossline_shots').val(5)
+        // $('#total_shots_in_survey').val(26666)
+        $('#survey_area_input').val(50)
+        $('#cost_per_sq_km').val(10000)
+        $('#shots_per_day').val(10000)
+
+        checkInputs()
+    }
+
+    function unitsChanged() { // meters / feet dropdown
+        checkInputs()
+    }
+
+    function templateChanged() { // templates dropdown
+        checkInputs()
+    }
+s
+    function adjustHTMLUnits(units) {
+        if (units == 'Meters')
+        {
+            $('.km_mile_2').text('Sq Km')
+            $('.km_mile').text('km')
+            $('.meter_feet').text('m')
+            // $('.km2_mile2').text('km2')
+        }
+        else if (units == 'Feet')
+        {
+            $('.km_mile_2').text('Sq Mi')
+            $('.km_mile').text('miles')
+            $('.meter_feet').text('ft')
+            // $('.km2_mile2').text('mile2')
+        }
+    }
+
+    function checkInputs() {
+        var units = $('#units').val()
+        var template_type = $('#template_type').val()
+        var sp_interval = $('#sp_interval').val()
+        var receiver_interval = $('#receiver_interval').val()
+        var shot_line_space = $('#shot_line_space').val()
+        var receiver_line_space = $('#receiver_line_space').val()
+        var receiver_lines_active = $('#receiver_lines_active').val()
+        var receivers_active_per_line = $('#receivers_active_per_line').val()
+        var shots_fired_in_a_salvo = $('#shots_fired_in_a_salvo').val()
+        var roll_in_crossline_shots = $('#roll_in_crossline_shots').val()
+        // var total_shots_in_survey = $('#total_shots_in_survey').val()
+        var survey_area_input = $('#survey_area_input').val()
+        var cost_per_sq_km = $('#cost_per_sq_km').val()
+        var shots_per_day = $('#shots_per_day').val()
+
+        let inputs = {
+            'units': units, 'template_type': template_type, 'sp_interval': parseFloat(sp_interval),
+            'receiver_interval': parseFloat(receiver_interval), 'shot_line_space': parseFloat(shot_line_space), 'receiver_line_space': parseFloat(receiver_line_space),
+            'receiver_lines_active': parseFloat(receiver_lines_active), 'receivers_active_per_line': parseFloat(receivers_active_per_line),
+            'shots_fired_in_a_salvo': parseFloat(shots_fired_in_a_salvo), 'roll_in_crossline_shots': parseFloat(roll_in_crossline_shots),
+            // 'total_shots_in_survey': parseFloat(total_shots_in_survey),
+            'survey_area_input': parseFloat(survey_area_input),
+            'cost_per_sq_km': parseFloat(cost_per_sq_km), 'shots_per_day': parseFloat(shots_per_day)
+        }
+
+        runCalculations(inputs)
+    }
+
+    function runCalculations(input) {
+        let Convfactor = input['units'] == 'Meters' ? 1000 : 5280 // if units = meters, 1000 ... if units = feet, 5280
+
+        let total_receivers_active = input['receiver_lines_active'] * input['receivers_active_per_line']
+        let each_shot_fired = eachShotFired(input['template_type'], input['shots_fired_in_a_salvo'], input['roll_in_crossline_shots'])
+        let inline_shot_to_roll_ratio = input['shots_fired_in_a_salvo'] / (input['receiver_lines_active'] * input['shot_line_space'] / input['receiver_interval'])
+        let total_fold = 0.5 * input['receivers_active_per_line'] * input['receiver_interval'] / input['shot_line_space'] * input['receiver_lines_active'] / 2 * each_shot_fired
+        let traces_per_sq_km = (2 * Convfactor / input['sp_interval'] * 2 * Convfactor / input['receiver_interval'] * total_fold) / 1000
+        let receivers_per_sq_km = Convfactor / input['receiver_interval'] * Convfactor / input['receiver_line_space']
+        let unique_shots_per_sq_km = Convfactor / input['sp_interval'] * Convfactor / input['shot_line_space']
+        let inline_bin_size = input['receiver_interval'] / 2      // * meters / feet *
+        let crossline_bin_size = input['sp_interval'] / 2      // * meters / feet *
+        let minimum_offset = Math.sqrt( ((input['receiver_interval'] / 2) ** 2) + ((input['sp_interval'] / 2) ** 2) )      // * meters / feet *
+        let max_min_offset = Math.sqrt( ( ( input['receiver_line_space'] - (input['sp_interval'] / 2) ) ** 2 ) + ( ( input['shot_line_space'] - (input['receiver_interval'] / 2) ) ** 2 ) )      // * meters / feet *
+        // min_max
+        // let maximum_max_offset = 0 // --------------------- // ='2'!D17 // (Seperate calculation sheet needs to be built to enable this variable)      // * meters / feet *
+        let shots_within_receiver_spread = shotsWithinReceiverSpread(input['template_type'], input['receiver_lines_active'], input['receiver_line_space'], input['sp_interval'])
+        let shots_on_either_side_of_spread = shotsOnEitherSideOfSpread(input['template_type'], shots_within_receiver_spread, input['shots_fired_in_a_salvo'])
+        let integer_number = parseInt(shots_on_either_side_of_spread)
+        let minimum_max_crossline_offset = minMaxCrosslineOffset(input['template_type'], input['sp_interval'], input['receiver_lines_active'], input['receiver_line_space'])
+        let maximum_inline_offset = ( (input['receivers_active_per_line'] / 2) - 0.5) * input['receiver_interval']      // * meters / feet *
+        let average_actual_shot_density = unique_shots_per_sq_km * each_shot_fired
+        // let survey_area = input['total_shots_in_survey'] / unique_shots_per_sq_km      // * meters (km2) / feet (miles2) *
+
+
+        // shots and receivers
+        let shotSet1 = getShots1(input['template_type'], input['shots_fired_in_a_salvo'], input['sp_interval'], input['receiver_line_space'], input['receiver_interval'], input['receiver_lines_active'], input['receivers_active_per_line'])
+        let shotSet2 = getShots2(input['template_type'], input['shots_fired_in_a_salvo'], input['receivers_active_per_line'], input['receiver_interval'], input['receiver_line_space'], input['receiver_lines_active'], input['sp_interval'])
+        let shotSet3 = getShots3(shotSet1, input['receiver_interval'], input['receivers_active_per_line'])
+        let shotSet4 = getShots4(shotSet2, shotSet3, input['receiver_interval'], input['receivers_active_per_line'])
+
+        let receiverLines = getReceiverLines(input['receiver_lines_active'], input['receiver_line_space'], input['receiver_lines_active'], input['receivers_active_per_line'], input['receiver_interval'])
+        let shot_data = getShotChartInfo(input['shots_fired_in_a_salvo'], input['template_type'], shotSet1, shotSet2, shotSet3, shotSet4)
+        let shots = generateShots(shot_data)
+
+        let receiver_y_value = receiverLines[0]['y'][1]
+        let receiver_x_max = getMax_Dict(receiverLines)
+        let y_value = shot_data['y'][0]
+        let x_min_shotSet1 = getMin(shotSet1['x'])
+
+        let min_max = minMaxCalc(input['template_type'], y_value, x_min_shotSet1, receiver_y_value) // --------------------- // ='2'!D18 // (Seperate calculation sheet needs to be built to enable this variable)      // * meters / feet *
+        let maximum_max_offset = Math.sqrt(  (receiver_x_max-x_min_shotSet1)**2 + (receiver_y_value-y_value)**2  )
+
+        let results = {
+            'total_receivers_active': parseFloat(total_receivers_active), 'each_shot_fired': parseFloat(each_shot_fired),
+            'inline_shot_to_roll_ratio': parseFloat(inline_shot_to_roll_ratio), 'total_fold': parseFloat(total_fold),
+            'traces_per_sq_km': parseFloat(traces_per_sq_km), 'receivers_per_sq_km': parseFloat(receivers_per_sq_km),
+            'unique_shots_per_sq_km': parseFloat(unique_shots_per_sq_km), 'inline_bin_size': parseFloat(inline_bin_size),
+            'crossline_bin_size': parseFloat(crossline_bin_size), 'minimum_offset': parseFloat(minimum_offset),
+            'max_min_offset': parseFloat(max_min_offset), 'min_max': parseFloat(min_max), 'maximum_max_offset': parseFloat(maximum_max_offset),
+            'shots_within_receiver_spread': parseFloat(shots_within_receiver_spread), 'shots_on_either_side_of_spread': parseFloat(shots_on_either_side_of_spread),
+            'integer_number': parseFloat(integer_number), 'minimum_max_crossline_offset': parseFloat(minimum_max_crossline_offset),
+            'maximum_inline_offset': parseFloat(maximum_inline_offset), 'average_actual_shot_density': parseFloat(average_actual_shot_density),
+            // 'survey_area': parseFloat(survey_area)
+        }
+
+        ovt_results = generateOVT(input['receiver_line_space'], input['receiver_interval'], input['sp_interval'], input['survey_area_input'], input['cost_per_sq_km'],
+                    input['shots_per_day'], input['shots_fired_in_a_salvo'], input['shot_line_space'], input['receiver_lines_active'],
+                    results['maximum_inline_offset'], results['minimum_max_crossline_offset'], results['total_fold'],
+                    results['unique_shots_per_sq_km'], results['receivers_per_sq_km'])
+
+
+        adjustHTMLUnits(input['units'])
+        setResults(results)
+        setResults(ovt_results)
+
+        // set meta data tags to store inputs, results, and ovt for CSV download on request
+        $('#inputs_data').data('json', input)
+        $('#results_data').data('json', results)
+        $('#ovt_results_data').data('json', ovt_results)
+
+        let errors = checkErrors(input)
+        errors == true ? defaultChart() : generateChart([...receiverLines, ...shots])
+    }
+
+    function shotsOnEitherSideOfSpread(template_type, shots_within_receiver_spread, shots_fired_in_a_salvo) {
+        if (template_type == 'Normal')
+        {
+            if (shots_fired_in_a_salvo > ((shots_fired_in_a_salvo - shots_within_receiver_spread) / 2) ) return 0
+            // else
+            return (shots_fired_in_a_salvo - shots_within_receiver_spread) / 2
+        }
+        if (template_type == 'Wing') return (shots_fired_in_a_salvo - shots_within_receiver_spread) * 2
+        if (template_type == 'Corner') return (shots_fired_in_a_salvo - shots_within_receiver_spread) * 4
+    }
+
+    function getMax_Dict(dict) {
+        let values = []
+        for (let i = 0; i < Object.keys(dict).length; i++) {
+            values.push( dict[i]['x'][0] )
+        }
+        return Math.max(...values)
+    }
+
+    function minMaxCalc(template_type, y_value, x_min_value, y_receiver) {
+
+        if (template_type == 'Normal') return Math.sqrt( x_min_value ** 2 + (y_receiver - y_value) ** 2  )
+        if (template_type == 'Wing') return Math.sqrt( x_min_value ** 2 + y_value ** 2  )
+        if (template_type == 'Corner') return Math.sqrt( y_receiver ** 2 + x_min_value ** 2  )
+    
+    }
+
+    function minMaxCrosslineOffset(template_type, sp_interval, receiver_lines_active, receiver_line_space) {
+        if (template_type == 'Normal') return (sp_interval / 2)
+        if (template_type == 'Wing' || template_type == 'Corner') return receiver_lines_active * receiver_line_space + sp_interval / 2
+    }
+
+    function generateOVT(receiver_line_space, receiver_interval, sp_interval, survey_area_input, cost_per_sq_km, shots_per_day, shots_fired_in_a_salvo, shot_line_space, receiver_lines_active,
+        maximum_inline_offset, minimum_max_crossline_offset, total_fold, unique_shots_per_sq_km, receivers_per_sq_km) {
+
+        let ovt_maximum_inline_offset = maximum_inline_offset
+        let ovt_min_max_crossline = minimum_max_crossline_offset
+        let ovt_step_size_inline = shot_line_space * 2
+        let ovt_step_size_crossline = receiver_line_space * 2
+        let ovt_inline = (ovt_maximum_inline_offset+receiver_interval/2)/ovt_step_size_inline
+        let ovt_crossline = (ovt_min_max_crossline+sp_interval/2)/ovt_step_size_crossline
+        let fully_populated_ovts = ovt_inline * ovt_crossline * 4
+        let ovt_per_fold_ratio = fully_populated_ovts / total_fold
+
+        // survey_area miles2
+
+        // survey_area_input
+        let total_shots_in_survey_ovt = survey_area_input * unique_shots_per_sq_km
+        let total_receivers = survey_area_input * receivers_per_sq_km
+
+        // cost_per_sq_km
+        let total_survey_cost = survey_area_input * cost_per_sq_km
+        let cost_per_shot = cost_per_sq_km / unique_shots_per_sq_km
+        
+        // shots_per_day
+        let area_shot_per_day = shots_per_day / unique_shots_per_sq_km
+        let receiver_moves_per_day = shots_per_day / shots_fired_in_a_salvo * receiver_lines_active * shot_line_space / receiver_interval
+        let duration = total_shots_in_survey_ovt / shots_per_day
+
+        let shot_to_receiver_roll_ratio = (shot_line_space/receiver_interval*receiver_lines_active)/shots_fired_in_a_salvo
+
+        let ovt_analysis = {
+            'ovt_maximum_inline_offset': ovt_maximum_inline_offset,
+            'ovt_min_max_crossline': ovt_min_max_crossline,
+            'ovt_step_size_inline': ovt_step_size_inline,
+            'ovt_step_size_crossline': ovt_step_size_crossline,
+            'ovt_inline': ovt_inline,
+            'ovt_crossline': ovt_crossline,
+            'fully_populated_ovts': fully_populated_ovts,
+            'ovt_per_fold_ratio': ovt_per_fold_ratio,
+
+            'total_shots_in_survey_ovt': total_shots_in_survey_ovt,
+            'total_receivers': total_receivers,
+
+            'total_survey_cost': total_survey_cost,
+            'cost_per_shot': cost_per_shot,
+
+            'area_shot_per_day': area_shot_per_day,
+            'receiver_moves_per_day': receiver_moves_per_day,
+            'duration': duration,
+
+            'shot_to_receiver_roll_ratio': shot_to_receiver_roll_ratio,
+        }
+
+        return ovt_analysis
+    }
+
+    function generateShots(shot_data) {
+        let chart_data = []
+
+        for (let i = 0; i < shot_data['x'].length; i++) {
+            var x = shot_data['x'][i]
+            var y = shot_data['y'][i]
+
+            chart_data.push({
+                type: 'dot',
+                x: [x],
+                y: [y],
+                mode: 'dots',
+                line: {
+                    color: '#004B7A',
+                    width: 10
+                }
+            })   
+        }
+
+        return chart_data
+    }
+
+
+    function getShots1(template_type, shots_fired_in_a_salvo, sp_interval, receiver_line_space, receiver_interval, receiver_lines_active, receivers_active_per_line) {
+        let x_calculations = []
+        let y_calculations = []
+        if (template_type == 'Wing')
+        {
+            for (let i = 0; i < shots_fired_in_a_salvo; i++) {
+                y_calculations.push( ((receivers_active_per_line/2-0.5)*receiver_interval) ) // +M10+$L$7
+                if (i==0)
+                {
+                    x_calculations.push( (-sp_interval / 2) )
+                }
+                else
+                {
+                    x_calculations.push( (x_calculations[i-1] - sp_interval) )
+                }
+            }
+        }
+        else if (template_type == 'Corner') {
+            let corner_y_variable = -(receivers_active_per_line/2-0.5)*receiver_interval-receiver_interval/2
+            for (let i = 0; i < shots_fired_in_a_salvo; i++) {
+                y_calculations.push( ((receivers_active_per_line/2-0.5)*receiver_interval) + corner_y_variable ) // +M10+$L$7
+                if (i==0)
+                {
+                    x_calculations.push( (-sp_interval / 2) )
+                }
+                else
+                {
+                    x_calculations.push( (x_calculations[i-1] - sp_interval) )
+                }
+            }
+        }
+        else
+        {
+            for (let i = 0; i < shots_fired_in_a_salvo; i++) {
+                y_calculations.push( ((receivers_active_per_line/2-0.5)*receiver_interval) ) // +M10+$L$7
+                if (i==0)
+                {
+                    x_calculations.push( ((receiver_lines_active-1)*receiver_line_space/2-(shots_fired_in_a_salvo-1)*sp_interval/2) )
+                }
+                else
+                {
+                    x_calculations.push( (x_calculations[i-1] + sp_interval) )
+                }
+            }
+        }
+        return {'x': x_calculations, 'y': y_calculations}
+    }
+
+    function getShots2(template_type, shots_fired_in_a_salvo, receivers_active_per_line, receiver_interval, receiver_line_space, receiver_lines_active, sp_interval) {
+
+        let x_calculations = []
+        let y_calculations = []
+
+        if (template_type == 'Wing')
+        {
+            for (let i = 0; i < shots_fired_in_a_salvo; i++) {
+                y_calculations.push( ((receivers_active_per_line/2-0.5)*receiver_interval) )
+                if (i==0)
+                {
+                    x_calculations.push( ((receiver_lines_active-1)*receiver_line_space+sp_interval/2) )
+                }
+                else
+                {
+                    x_calculations.push( (x_calculations[i-1] + sp_interval) )
+                }
+            }
+            return {'x': x_calculations, 'y': y_calculations}
+        }
+        else if (template_type == 'Corner')
+        {
+            let corner_y_variable = -(receivers_active_per_line/2-0.5)*receiver_interval-receiver_interval/2
+            for (let i = 0; i < shots_fired_in_a_salvo; i++) {
+                y_calculations.push( ((receivers_active_per_line/2-0.5)*receiver_interval)  + corner_y_variable )
+                if (i==0)
+                {
+                    x_calculations.push( ((receiver_lines_active-1)*receiver_line_space+sp_interval/2) )
+                }
+                else
+                {
+                    x_calculations.push( (x_calculations[i-1] + sp_interval))
+                }
+            }
+            return {'x': x_calculations, 'y': y_calculations}
+        }
+        else
+        {
+            return {'x': [], 'y': []}
+        }
+
+    }
+
+    
+    function getShots3(shotSet1, receiver_interval, receivers_active_per_line) {
+        let x_calculations = []
+        let y_calculations = []
+
+        for (let index = 0; index < shotSet1['x'].length; index++) {
+            var x_value = shotSet1['x'][index]
+            var y_value = shotSet1['y'][index]
+            x_calculations.push(x_value)
+            if (index == 0)
+            {
+                y_calculations.push(y_value + (receiver_interval * receivers_active_per_line))
+            }
+            else
+            {
+                y_calculations.push(y_value + (receiver_interval * receivers_active_per_line))
+            }
+        }
+
+        return {'x': x_calculations, 'y': y_calculations}
+    }
+
+    function getShots4(shotSet2, shotSet3, receiver_interval, receivers_active_per_line) {
+        let x_calculations = []
+        let y_calculations = []
+
+        for (let index = 0; index < shotSet2['x'].length; index++) {
+            var x_value = shotSet2['x'][index]
+            var y_value = shotSet3['y'][index]
+            x_calculations.push(x_value)
+            y_calculations.push(y_value)
+        }
+
+        return {'x': x_calculations, 'y': y_calculations}
+    }
+
+    function getReceiverLines(receiver_lines_active, receiver_line_space, receiver_lines_active, receivers_active_per_line, receiver_interval) {
+        let chart_data = []
+
+        let line_width = 3
+
+        let x_value_reference = []
+        let y_value = (receivers_active_per_line-1)*receiver_interval
+
+        for (let index = 0; index < receiver_lines_active; index++) {
+
+            let x_value = 0
+            if (index > 0)
+            {
+                x_value = x_value_reference[index - 1] + receiver_line_space
+            }
+            x_value_reference.push(x_value)
+
+            let trace = {
+                type: 'line',
+                x: [x_value, x_value],
+                y: [0, y_value],
+                mode: 'lines',
+                line: {
+                    color: '#FFCD99',
+                    width: line_width
+                }
+            }
+
+            chart_data.push(trace)
+
+        }
+
+        return chart_data
+    }
+
+    function getMin(values_array) {
+        let values = []
+        for (var i=0; i < values_array.length; i++) {
+            values.push(values_array[i])
+        }
+        min = Math.min(...values)
+        return min
+    }
+
+    function getMax(values_array) {
+        let values = []
+        for (var i=0; i < values_array.length; i++) {
+            values.push(values[i])
+        }
+        max = Math.max(...values)
+        return max
+    }
+
+    function generateChart(chart_data) {
+
+        let x_values = []
+        for (var i=0; i < chart_data.length; i++) {
+            x_values.push(chart_data[i]['x'][0])
+        }
+
+        let y_values = []
+        for (var i=0; i < chart_data.length; i++) {
+            chart_data[i]['y'][1] ? y_values.push(chart_data[i]['y'][1]) : null
+        }
+
+        x_max = Math.max(...x_values)
+        x_min = Math.min(...x_values)
+        x_range = Math.abs(x_max) + Math.abs(x_min)
+        y_max = Math.max(...y_values)
+
+        scale_max = Math.max(x_max, y_max)
+
+        let x_minimum = parseInt((x_min * 1.05 - scale_max * .05))
+
+        Plotly.newPlot(
+            'chart',
+            chart_data,
+            layout = {
+                // height: 700,
+                // width: 700,
+                showlegend: false,
+                xaxis: {
+                    showgrid: true,
+                    range: [x_minimum, scale_max * 1.05] // adds a 5% gap on either side
+                },
+                yaxis: {
+                    showgrid: true,
+                    showline: true,
+                    range: [(-scale_max * .05), scale_max * 1.05]
+                },
+                title: 'Land Fold and Offset for Orthogonal Grids',
+                images: [
+                    {
+                        x: 1.05,
+                        y: -.15,
+                        sizex: 0.10,
+                        sizey: 0.10,
+                        source: "https://static.wixstatic.com/media/6440e3_79209f11808643efaab19239b58ec2f9~mv2.png/v1/fill/w_172,h_93,al_c,usm_2.00_1.00_0.00,enc_auto/No_Background.png",
+                        xanchor: "right",
+                        xref: "paper",
+                        yanchor: "bottom",
+                        yref: "paper"
+                    }
+                ],
+            },
+            config={'modeBarButtonsToRemove': ["select", "lasso"], responsive: true, 'displaylogo': false}, // 'scrollZoom': true
+        )
+
+    }
+
+        
+    function checkErrors(input) {
+
+        resetAllInputErrors()
+        let errors = false
+        
+        let receivers_active_per_line_multiple = round( 2 * input['shot_line_space'] / input['receiver_interval'] , 2 )
+        if (input['receivers_active_per_line'] % receivers_active_per_line_multiple != 0)
+        {
+            document.getElementById('receivers_active_per_line_tip').setAttribute('data-tip', `must me a multiple of ${receivers_active_per_line_multiple} (2 * shot line space / receiver interval)`)
+            appendError('receivers_active_per_line')
+            errors = true
+        }
+
+        let shots_fired_in_a_salvo_multiple = round( input['receiver_line_space'] / input['sp_interval'] , 2 )
+        if (input['shots_fired_in_a_salvo'] % shots_fired_in_a_salvo_multiple != 0)
+        {
+            document.getElementById('shots_fired_in_a_salvo_tip').setAttribute('data-tip', `must me a multiple of ${shots_fired_in_a_salvo_multiple} (receiver line space / sp interval)`)
+            appendError('shots_fired_in_a_salvo')
+            errors = true
+        }
+
+        return errors
+    
+    }
+
+    function appendError(inputId) {
+        document.getElementById(inputId).classList.add('input_error')
+        document.getElementById(inputId + '_tip').classList.add('input_error_tip')
+    }
+
+    function resetAllInputErrors() {
+        let inputs = document.getElementsByClassName('input_error')
+        let tips = document.getElementsByClassName('input_error_tip')
+
+        for (var i=0; i < inputs.length; i++) {
+            inputs[i].classList.remove('input_error')
+        }
+        for (var i=0; i < tips.length; i++) {
+            tips[i].classList.remove('input_error_tip')
+        }
+    }
+
+
+    function getShotChartInfo(shots_fired_in_a_salvo, template_type, shotSet1, shotSet2, shotSet3, shotSet4) {
+        let shots_x = []
+        let shots_y = []
+
+        for (let i = 0; i < shots_fired_in_a_salvo; i++) {
+            let shots1x = shotSet1['x'][i]
+            let shots2x = shotSet2['x'][i]
+            let shots3x = template_type == 'Corner' ? shotSet3['x'][i] : null
+            let shots4x = template_type == 'Corner' ? shotSet4['x'][i] : null
+
+            let shots1y = shotSet1['y'][i]
+            let shots2y = shotSet2['y'][i]
+            let shots3y = template_type == 'Corner' ? shotSet3['y'][i] : null
+            let shots4y = template_type == 'Corner' ? shotSet4['y'][i] : null
+
+            shots1x ? shots_x.push(shots1x) : null
+            shots2x ? shots_x.push(shots2x) : null
+            shots3x ? shots_x.push(shots3x) : null
+            shots4x ? shots_x.push(shots4x) : null
+
+            shots1y ? shots_y.push(shots1y) : null
+            shots2y ? shots_y.push(shots2y) : null
+            shots3y ? shots_y.push(shots3y) : null
+            shots4y ? shots_y.push(shots4y) : null
+        }
+
+        return {'x': shots_x, 'y': shots_y}
+    }
+
+
+    function setResults(results) {
+        for (const [id, value] of Object.entries(results)) {
+            if (is_NaN(value) == false)
+            {
+                if (value == parseInt(value) || value >= 1000) // If the value is large, show as a comma.
+                {
+                    $('#' + id).text(numberWithCommas(parseInt(round(value, 0))))
+                }
+                else
+                {
+                    $('#' + id).text(round(value, 1))
+
+                    if (id == 'ovt_per_fold_ratio') { $('#' + id).text(round(value, 2)) } // want to show more of the decimal on this calculation
+
+                }
+                $('#' + id).parents().eq(2).removeClass('calculation_error')
+            }
+            else
+            {
+                $('#' + id).text('')
+                $('#' + id).parents().eq(2).addClass('calculation_error')
+            }
+        }
+    }
+
+    function is_NaN(x) {
+        return x !== x
+    }
+
+    function round(num, decimals) {
+        let n = decimals.toString()
+        return +(Math.round(num + `e+${n}`)  + `e-${n}`)
+    }
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function eachShotFired(template_type, shots_fired_in_a_salvo, roll_in_crossline_shots) {
+
+        if (template_type == 'Normal')
+        {
+            return shots_fired_in_a_salvo / roll_in_crossline_shots
+        }
+        else if (template_type == 'Wing')
+        {
+            return 2 * shots_fired_in_a_salvo / roll_in_crossline_shots
+        }
+
+        else if (template_type == 'Corner')
+        {
+            return 4 * shots_fired_in_a_salvo / roll_in_crossline_shots
+        }
+        
+    }
+
+    function shotsWithinReceiverSpread(template_type, receiver_lines_active, receiver_line_space, sp_interval) {
+
+        if (template_type == 'Normal')
+        {
+            return (receiver_lines_active - 1) * receiver_line_space / sp_interval
+        }
+        else
+        {
+            return 0
+        }
+
+    }
+
+    function exportToCsv(filename, rows) {
+        var processRow = function (row) {
+            var finalVal = '';
+            for (var j = 0; j < row.length; j++) {
+                var innerValue = row[j] === null ? '' : row[j].toString();
+                if (row[j] instanceof Date) {
+                    innerValue = row[j].toLocaleString();
+                };
+                var result = innerValue.replace(/"/g, '""');
+                if (result.search(/("|,|\n)/g) >= 0)
+                    result = '"' + result + '"';
+                if (j > 0)
+                    finalVal += ',';
+                finalVal += result;
+            }
+            return finalVal + '\n';
+        };
+
+        var csvFile = '';
+        for (var i = 0; i < rows.length; i++) {
+            csvFile += processRow(rows[i]);
+        }
+
+        var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
+
+    function sendTableData() {
+
+        let inputs = $('#inputs_data').data('json')
+        let results = $('#results_data').data('json')
+        let ovt_results = $('#ovt_results_data').data('json')
+
+        let csv_data = []
+
+        // Reverse for loop so we can use "unshift" to append the inputs in the order they are viewed on the website.
+        let inputs_array = Array.from(new Array(Object.keys(inputs).length), (val, index) => [Object.keys(inputs)[index], Object.values(inputs)[index]])
+        let results_array = Array.from(new Array(Object.keys(results).length), (val, index) => [Object.keys(results)[index], Object.values(results)[index]])
+        let ovt_results_array = Array.from(new Array(Object.keys(ovt_results).length), (val, index) => [Object.keys(ovt_results)[index], Object.values(ovt_results)[index]])
+
+        for (let i = 0; i < inputs_array.length; i++) {
+            if (i == 0)
+            {
+                csv_data.push(['Inputs'])
+            }
+            csv_data.push(inputs_array[i])
+        }
+
+        for (let i = 0; i < results_array.length; i++) {
+            if (i == 0)
+            {
+                csv_data.push([''])
+                csv_data.push(['Results'])
+            }
+            csv_data.push(results_array[i])
+        }
+
+        for (let i = 0; i < ovt_results_array.length; i++) {
+            if (i == 0)
+            {
+                csv_data.push([''])
+                csv_data.push(['OVT Analysis'])
+            }
+            else if (i == 8)
+            {
+                // ovt analysis are the first 9, this breaks down and seperates the operational summary
+                csv_data.push([''])
+                csv_data.push(['Operational Summary'])
+            }
+            csv_data.push(ovt_results_array[i])
+        }
+
+        exportToCsv('acteq_land_fold_and_offset_results.csv', csv_data)
+
+    }
+</script>
+
+
+<!-- <script src="static/assets/js/app2/app2.js"></script> -->
+</html>
